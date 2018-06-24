@@ -1,0 +1,32 @@
+# This is a configuration file for setting up the sprinkler schedule.
+
+[SprinklerConfig] # don't edit this line
+####
+## Provide API key.  A free developer's API key is available
+# here: https://www.wunderground.com/weather/api/d/pricing.html
+api_key = 4cec4e3692ec80782e255e8aad8a5fa5
+
+####
+## For more accurate response I am using City Codes
+# Just google accuweather of the city you want and the code will be in the URL
+# e.g. for Bangalore - https://www.accuweather.com/en/in/mangalore/188760/weather-forecast/188760
+town = 188760
+
+####
+## How long in minutes to run the sprinkler at a time
+runtime_min = 15
+
+####
+## Rain threshold.  If daily rainfall (in inches) exceeds this amount,
+# the sprinkler will not run.
+rain_threshold_in = 0.05
+
+####
+## GPIO pins to control the sprinkler and the status LEDs
+gpio_starter = 17
+gpio_led1 = 27
+#gpio_led2 = 22  # Not used currently
+
+####
+## Choose location and name of log file
+log_file = /home/pi/sprinkler.log
