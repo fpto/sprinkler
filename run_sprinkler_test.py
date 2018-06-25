@@ -10,55 +10,62 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 
-api_key = 'qhjhdK4aGlExSQVWA6jbsAhNntab7Wns'
+api_key = 'maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic'
 # City code for Bagalore where it always rain: 188760
 # City code for Tegucigalpa: 188046
 city = 188760
 
-# Led light pin
-l = 14
-GPIO.setup(l, GPIO.OUT)
-def quickLedBlick():
-    	GPIO.output(l, GPIO.HIGH)
+# GPIO  pin
+water_gpio = 14 # Led light #1
+l2 = 18 #led light #2
+leds_list = [water_gpio, l2]
+
+# Watering time
+watering_time = 50
+
+# Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
+max_preci = 0
+
+for led in leds_list:
+	GPIO.setup(led, GPIO.OUT)
+	GPIO.output(led, GPIO.LOW)
+
+def watering():
+    	GPIO.output(water_gpio, GPIO.HIGH)
+    	time.sleep(watering_time)
+    	GPIO.output(water_gpio, GPIO.LOW)
     	time.sleep(0.25)
-    	GPIO.output(l, GPIO.LOW)
-    	time.sleep(0.25)
-def slowLedBlick():
-	GPIO.output(l, GPIO.HIGH)
-        time.sleep(1)
-        GPIO.output(l, GPIO.LOW)
-        time.sleep(1)
+
+def standbyBlick(led):
+        GPIO.output(led, GPIO.HIGH)
+        time.sleep(0.5)
+        GPIO.output(led, GPIO.LOW)
+        time.sleep(2)
 
 def job():
-    try:
-    HISTORY_API_URL = 'http://dataservice.accuweather.com/currentconditions/v1/{town}/historical/24?apikey={key}&language=en-us&details=true'
-    yesterday_weather = requests.get(HISTORY_API_URL.format(town=city, key=api_key))
-    yesterday_rainfall = yesterday_weather.json()[0]['PrecipitationSummary']['Past24Hours']['Metric']['Value']
-    print('It rained {yesterday_rainfall} mm of water'.format(yesterday_rainfall=yesterday_rainfall))
+	try:
+		HISTORY_API_URL = 'http://dataservice.accuweather.com/currentconditions/v1/{town}/historical/24?apikey={key}&language=en-us&details=true'
+   		yesterday_weather = requests.get(HISTORY_API_URL.format(town=city, key=api_key))
+   		yesterday_rainfall = yesterday_weather.json()[0]['PrecipitationSummary']['Past24Hours']['Metric']['Value']
+   		print('It rained {yesterday_rainfall} mm of water'.format(yesterday_rainfall=yesterday_rainfall))
 
-    FORECAST_API_URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/{town}?apikey={key}&details=true&metric=true'
-    todays_weather_forecast = requests.get(FORECAST_API_URL.format(town=city, key=api_key))
-    todays_rainfall_forecast = todays_weather_forecast.json()['DailyForecasts'][0]['Day']['Rain']['Value']
-    print('Forecast is {todays_rainfall_forecast} mm of rain'.format(todays_rainfall_forecast=todays_rainfall_forecast))
+    		FORECAST_API_URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/{town}?apikey={key}&details=true&metric=true'
+    		todays_weather_forecast = requests.get(FORECAST_API_URL.format(town=city, key=api_key))
+    		todays_rainfall_forecast = todays_weather_forecast.json()['DailyForecasts'][0]['Day']['Rain']['Value']
+        	print('Forecast is {todays_rainfall_forecast} mm of rain'.format(todays_rainfall_forecast=todays_rainfall_forecast))
 
-    rainfall_48_hours = yesterday_rainfall + yesterday_rainfall
-    print('Between yesterday and today expect {rainfall_48_hours} mm of rain'.format(rainfall_48_hours=rainfall_48_hours))
+   	 	rainfall_48_hours = yesterday_rainfall + yesterday_rainfall
+   	 	print('Between yesterday and today expect {rainfall_48_hours} mm of rain'.format(rainfall_48_hours=rainfall_48_hours))
 
-    if todays_rainfall_forecast > 0:
-        quickLedBlick()
-    else:
-	    slowLedBlick()
-
-    except KeyboardInterrupt:
-        print " Quit"
-        GPIO.cleanup()
-
-l2 = 18
-def standbyBlick():
-        GPIO.output(l2, GPIO.HIGH)
-        time.sleep(0.25)
-        GPIO.output(l, GPIO.LOW)
-        time.sleep(2)
+   	 	if rainfall_48_hours < max_preci:
+       			watering()
+			print("We are watering.")
+   	 	else:
+	    		standbyBlick(water_gpio)
+			print("We are not watering this time. We will get more than {threshold} mm water.".format(threshold=max_preci))
+	except KeyboardInterrupt:
+        	print " Quit"
+        	GPIO.cleanup()
 
 
 schedule.every().minute.do(job)
@@ -70,4 +77,4 @@ schedule.every().minute.do(job)
 
 while True:
     schedule.run_pending()
-    standbyBlick()
+    standbyBlick(l2)
