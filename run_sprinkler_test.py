@@ -3,10 +3,11 @@ import sys
 import requests
 import ConfigParser
 import datetime
-from time import sleep
+import time
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
+
 
 api_key = 'qhjhdK4aGlExSQVWA6jbsAhNntab7Wns'
 # City code for Bagalore where it always rain: 188760
@@ -29,14 +30,26 @@ print('Between yesterday and today expect {rainfall_48_hours} mm of rain'.format
 
 #TODO A log file would be great
 
+
 # Led light pin
-l = 4
-def ledBlick():
+l = 14
+GPIO.setup(l, GPIO.OUT)
+def quickLedBlick():
     	GPIO.output(l, GPIO.HIGH)
-    	time.sleep(0.5)
+    	time.sleep(0.25)
     	GPIO.output(l, GPIO.LOW)
-    	time.sleep(0.5)
+    	time.sleep(0.25)
+def slowLedBlick():
+	GPIO.output(l, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(l, GPIO.LOW)
+        time.sleep(1)
+
+# uncomment line below for testing lights
 
 while True:
-    if todays_rainfall_forecast > 0
-        ledBlick()
+    if todays_rainfall_forecast > 0:
+        quickLedBlick()
+    else:
+	slowLedBlick()
+
