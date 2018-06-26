@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "run_sprinkler_test.py", line 81, in <module>
+    schedule.every(2).day.at('06:30').do(job)
+  File "/usr/local/lib/python2.7/dist-packages/schedule/__init__.py", line 260, in day
+    assert self.interval == 1, 'Use days instead of day'
+AssertionError: Use days instead of day
+Traceback (most recent call last):
+  File "run_sprinkler_test.py", line 81, in <module>
+    schedule.every(2).day.at('06:30').do(job)
+  File "/usr/local/lib/python2.7/dist-packages/schedule/__init__.py", line 260, in day
+    assert self.interval == 1, 'Use days instead of day'
+AssertionError: Use days instead of day
+Traceback (most recent call last):
+  File "run_sprinkler_test.py", line 81, in <module>
+    schedule.every(2).day.at('06:30').do(job)
+  File "/usr/local/lib/python2.7/dist-packages/schedule/__init__.py", line 260, in day
+    assert self.interval == 1, 'Use days instead of day'
+AssertionError: Use days instead of day

@@ -22,10 +22,10 @@ l2 = 18 #led light #2
 leds_list = [water_gpio, l2]
 
 # Watering time
-watering_time = 5
+watering_time = 60
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
-max_preci = 0
+max_preci = 20
 
 for led in leds_list:
 	GPIO.setup(led, GPIO.OUT)
@@ -45,33 +45,40 @@ def standbyBlick(led):
         GPIO.output(led, GPIO.LOW)
         time.sleep(2)
 
+def quickBlick(led):
+        GPIO.output(led, GPIO.HIGH)
+        time.sleep(0.25)
+        GPIO.output(led, GPIO.LOW)
+        time.sleep(0.25)
+
 def job():
 	try:
 		HISTORY_API_URL = 'http://dataservice.accuweather.com/currentconditions/v1/{town}/historical/24?apikey={key}&language=en-us&details=true'
    		yesterday_weather = requests.get(HISTORY_API_URL.format(town=city, key=api_key))
    		yesterday_rainfall = yesterday_weather.json()[0]['PrecipitationSummary']['Past24Hours']['Metric']['Value']
-   		loggin.info('It rained {yesterday_rainfall} mm of water'.format(yesterday_rainfall=yesterday_rainfall))
+   		logging.info('It rained {yesterday_rainfall} mm of water'.format(yesterday_rainfall=yesterday_rainfall))
 
 		FORECAST_API_URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/{town}?apikey={key}&details=true&metric=true'
 		todays_weather_forecast = requests.get(FORECAST_API_URL.format(town=city, key=api_key))
 		todays_rainfall_forecast = todays_weather_forecast.json()['DailyForecasts'][0]['Day']['Rain']['Value']
-    	loggin.info('Forecast is {todays_rainfall_forecast} mm of rain'.format(todays_rainfall_forecast=todays_rainfall_forecast))
+    		logging.info('Forecast is {todays_rainfall_forecast} mm of rain'.format(todays_rainfall_forecast=todays_rainfall_forecast))
 
    	 	rainfall_48_hours = yesterday_rainfall + yesterday_rainfall
-   	 	loggin.info('Between yesterday and today expect {rainfall_48_hours} mm of rain'.format(rainfall_48_hours=rainfall_48_hours))
+   	 	logging.info('Between yesterday and today expect {rainfall_48_hours} mm of rain'.format(rainfall_48_hours=rainfall_48_hours))
 
-   	 	if rainfall_48_hours < max_preci:
-       		watering()
-			loggin.info("We are watering.")
+   	 	if rainfall_48_hours <= max_preci:
+       			print("Watering starting.")
+			watering()
+			logging.info("Watering finished.")
+			print("Watering finished")
    	 	else:
-	    	standbyBlick(water_gpio)
-			loggin.info("We are not watering this time. We will get more than {threshold} mm water.".format(threshold=max_preci))
+			logging.info("We are not watering this time. We will get more than {threshold} mm water.".format(threshold=max_preci))
 	except KeyboardInterrupt:
-        	loggin.info " Quit"
+        	logging.info(" Quit")
         	GPIO.cleanup()
 
 
-schedule.every().minute.do(job)
+schedule.every(2).days.at('06:30').do(job)
 
 #TODO A log file would be great
 
