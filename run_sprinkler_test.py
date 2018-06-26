@@ -63,7 +63,7 @@ def job():
 		todays_rainfall_forecast = todays_weather_forecast.json()['DailyForecasts'][0]['Day']['Rain']['Value']
     		logging.info('Forecast is {todays_rainfall_forecast} mm of rain'.format(todays_rainfall_forecast=todays_rainfall_forecast))
 
-   	 	rainfall_48_hours = yesterday_rainfall + yesterday_rainfall
+   	 	rainfall_48_hours = yesterday_rainfall + todays_rainfall_forecast
    	 	logging.info('Between yesterday and today expect {rainfall_48_hours} mm of rain'.format(rainfall_48_hours=rainfall_48_hours))
 
    	 	if rainfall_48_hours <= max_preci:
