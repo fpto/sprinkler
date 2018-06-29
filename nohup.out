@@ -16,3 +16,9 @@ Traceback (most recent call last):
   File "/usr/local/lib/python2.7/dist-packages/schedule/__init__.py", line 260, in day
     assert self.interval == 1, 'Use days instead of day'
 AssertionError: Use days instead of day
+Traceback (most recent call last):
+  File "new_sprinkler.py", line 91, in <module>
+    standbyBlick(l2)
+  File "new_sprinkler.py", line 46, in standbyBlick
+    time.sleep(2)
+KeyboardInterrupt

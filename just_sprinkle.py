@@ -4,6 +4,7 @@ import requests
 import ConfigParser
 import datetime
 import time
+from datetime import datetime
 import schedule
 import logging
 import RPi.GPIO as GPIO
@@ -17,12 +18,13 @@ api_key = 'maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic'
 city = 188046
 
 # GPIO  pin
-water_gpio = 26 # Led light #1
+water_gpio = 26 
+l1 = 14 # Led light #1
 l2 = 18 #led light #2
-leds_list = [water_gpio, l2]
+leds_list = [water_gpio, l1,  l2]
 
 # Watering time
-watering_time = 60
+watering_time = 10
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
 max_preci = 20
@@ -34,16 +36,17 @@ GPIO.output(water_gpio, GPIO.HIGH)
 GPIO.output(l2, GPIO.LOW)
 
 def watering():
+	print("Watering starting", str(datetime.now()))
     	GPIO.output(water_gpio, GPIO.LOW)
     	time.sleep(watering_time)
     	GPIO.output(water_gpio, GPIO.HIGH)
     	time.sleep(0.25)
-
+	print("Watering finished", str(datetime.now()))
 def standbyBlick(led):
         GPIO.output(led, GPIO.HIGH)
         time.sleep(0.5)
         GPIO.output(led, GPIO.LOW)
-        time.sleep(2)
+        time.sleep(0.5)
 
 def quickBlick(led):
         GPIO.output(led, GPIO.HIGH)
@@ -51,6 +54,15 @@ def quickBlick(led):
         GPIO.output(led, GPIO.LOW)
         time.sleep(0.25)
 
-print("Watering starting")
-watering()
-print("Watering finished")
+
+schedule.every().minute.do(watering)
+
+#TODO A log file would be great
+
+
+# uncomment line below for testing lights
+
+while True:
+    schedule.run_pending()
+    standbyBlick(l1)
+

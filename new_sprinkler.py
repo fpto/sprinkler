@@ -22,7 +22,7 @@ l2 = 18 #led light #2
 leds_list = [water_gpio, l2]
 
 # Watering time
-watering_time = 60
+watering_time = 240
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
 max_preci = 20
@@ -67,7 +67,8 @@ def job():
    	 	logging.info('Between yesterday and today expect {rainfall_48_hours} mm of rain'.format(rainfall_48_hours=rainfall_48_hours))
 
    	 	if rainfall_48_hours <= max_preci:
-       			print("Watering starting.")
+       			print("Not enough water so. Watering starting.")
+			logging.info("Watering starting.")
 			watering()
 			logging.info("Watering finished.")
 			print("Watering finished")
@@ -78,7 +79,7 @@ def job():
         	GPIO.cleanup()
 
 
-schedule.every(2).days.at('06:30').do(job)
+schedule.every().day.at('06:30').do(job)
 
 #TODO A log file would be great
 
