@@ -18,11 +18,13 @@ city = 188046
 
 # GPIO  pin
 water_gpio = 26 # Led light #1
+sprinkler_gpio = 19 # Lower sprinkler
 l2 = 18 #led light #2
-leds_list = [water_gpio, l2]
+leds_list = [water_gpio, l2, sprinkler_gpio]
 
 # Watering time
-watering_time = 240
+watering_time = 720
+sprinkler_time = 60
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
 max_preci = 20
@@ -34,10 +36,15 @@ GPIO.output(water_gpio, GPIO.HIGH)
 GPIO.output(l2, GPIO.LOW)
 
 def watering():
+        GPIO.output(sprinkler_gpio, GPIO.LOW)
+        time.sleep(sprinkler_time)
+        GPIO.output(sprinkler_gpio, GPIO.HIGH)
+        time.sleep(0.25)
     	GPIO.output(water_gpio, GPIO.LOW)
     	time.sleep(watering_time)
     	GPIO.output(water_gpio, GPIO.HIGH)
     	time.sleep(0.25)
+
 
 def standbyBlick(led):
         GPIO.output(led, GPIO.HIGH)
@@ -80,8 +87,6 @@ def job():
 
 
 schedule.every().day.at('06:30').do(job)
-
-#TODO A log file would be great
 
 
 # uncomment line below for testing lights
