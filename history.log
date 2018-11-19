@@ -227,3 +227,55 @@
 2018-07-10 06:30:02,340:INFO:Between yesterday and today expect 2.0 mm of rain
 2018-07-10 06:30:02,341:INFO:Watering starting.
 2018-07-10 06:34:02,592:INFO:Watering finished.
+2018-10-21 06:30:01,801:INFO:Running job Every 1 day at 06:30:00 do job() (last run: [never], next run: 2018-10-21 06:30:00)
+2018-10-21 06:30:01,873:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-21 06:30:02,397:DEBUG:http://dataservice.accuweather.com:80 "GET /currentconditions/v1/188046/historical/24?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&language=en-us&details=true HTTP/1.1" 200 None
+2018-10-21 06:30:02,453:INFO:It rained 1.0 mm of water
+2018-10-21 06:30:02,465:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-21 06:30:02,858:DEBUG:http://dataservice.accuweather.com:80 "GET /forecasts/v1/daily/1day/188046?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&details=true&metric=true HTTP/1.1" 200 1049
+2018-10-21 06:30:02,867:INFO:Forecast is 1.0 mm of rain
+2018-10-21 06:30:02,868:INFO:Between yesterday and today expect 2.0 mm of rain
+2018-10-21 06:30:02,868:INFO:Watering starting.
+2018-10-21 06:43:03,530:INFO:Watering finished.
+2018-10-22 06:30:00,192:INFO:Running job Every 1 day at 06:30:00 do job() (last run: 2018-10-21 06:43:03, next run: 2018-10-22 06:30:00)
+2018-10-22 06:30:00,205:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-22 06:30:00,692:DEBUG:http://dataservice.accuweather.com:80 "GET /currentconditions/v1/188046/historical/24?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&language=en-us&details=true HTTP/1.1" 200 None
+2018-10-22 06:30:00,746:INFO:It rained 0.0 mm of water
+2018-10-22 06:30:00,758:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-22 06:30:01,263:DEBUG:http://dataservice.accuweather.com:80 "GET /forecasts/v1/daily/1day/188046?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&details=true&metric=true HTTP/1.1" 200 947
+2018-10-22 06:30:01,272:INFO:Forecast is 0.0 mm of rain
+2018-10-22 06:30:01,273:INFO:Between yesterday and today expect 0.0 mm of rain
+2018-10-22 06:30:01,274:INFO:Watering starting.
+2018-10-22 06:43:01,935:INFO:Watering finished.
+2018-10-23 06:30:00,745:INFO:Running job Every 1 day at 06:30:00 do job() (last run: 2018-10-22 06:43:01, next run: 2018-10-23 06:30:00)
+2018-10-23 06:30:00,760:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-23 06:30:01,617:DEBUG:http://dataservice.accuweather.com:80 "GET /currentconditions/v1/188046/historical/24?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&language=en-us&details=true HTTP/1.1" 200 None
+2018-10-23 06:30:34,227:INFO:It rained 0.0 mm of water
+2018-10-23 06:30:34,238:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-23 06:30:34,544:DEBUG:http://dataservice.accuweather.com:80 "GET /forecasts/v1/daily/1day/188046?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&details=true&metric=true HTTP/1.1" 200 None
+2018-10-23 06:30:34,554:INFO:Forecast is 0.0 mm of rain
+2018-10-23 06:30:34,555:INFO:Between yesterday and today expect 0.0 mm of rain
+2018-10-23 06:30:34,555:INFO:Watering starting.
+2018-10-23 06:43:35,123:INFO:Watering finished.
+2018-10-24 06:30:01,815:INFO:Running job Every 1 day at 06:30:00 do job() (last run: 2018-10-23 06:43:35, next run: 2018-10-24 06:30:00)
+2018-10-24 06:30:01,831:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-24 06:30:09,269:DEBUG:http://dataservice.accuweather.com:80 "GET /currentconditions/v1/188046/historical/24?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&language=en-us&details=true HTTP/1.1" 200 2971
+2018-10-24 06:30:13,155:INFO:It rained 0.0 mm of water
+2018-10-24 06:30:13,166:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-24 06:30:16,833:DEBUG:http://dataservice.accuweather.com:80 "GET /forecasts/v1/daily/1day/188046?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&details=true&metric=true HTTP/1.1" 200 None
+2018-10-24 06:30:17,636:INFO:Forecast is 0.0 mm of rain
+2018-10-24 06:30:17,637:INFO:Between yesterday and today expect 0.0 mm of rain
+2018-10-24 06:30:17,638:INFO:Watering starting.
+2018-10-24 06:43:18,299:INFO:Watering finished.
+2018-10-25 06:30:01,745:INFO:Running job Every 1 day at 06:30:00 do job() (last run: [never], next run: 2018-10-25 06:30:00)
+2018-10-25 06:30:01,816:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-25 06:30:02,330:DEBUG:http://dataservice.accuweather.com:80 "GET /currentconditions/v1/188046/historical/24?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&language=en-us&details=true HTTP/1.1" 200 None
+2018-10-25 06:30:02,386:INFO:It rained 0.0 mm of water
+2018-10-25 06:30:02,397:DEBUG:Starting new HTTP connection (1): dataservice.accuweather.com
+2018-10-25 06:30:03,488:DEBUG:http://dataservice.accuweather.com:80 "GET /forecasts/v1/daily/1day/188046?apikey=maoUyv52tVfNoR4OoUZLCvyVgYcyP2ic&details=true&metric=true HTTP/1.1" 200 956
+2018-10-25 06:30:03,497:INFO:Forecast is 0.0 mm of rain
+2018-10-25 06:30:03,498:INFO:Between yesterday and today expect 0.0 mm of rain
+2018-10-25 06:30:03,499:INFO:Watering starting.
+2018-10-25 06:30:03,499:INFO:Sprinkler running.
+2018-10-25 06:31:03,810:INFO:Sprinkler finished.
+2018-10-25 06:31:03,811:INFO:Watering finished.

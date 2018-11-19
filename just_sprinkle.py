@@ -1,3 +1,4 @@
+
 import os
 import sys
 import requests
@@ -26,8 +27,8 @@ l2 = 18 #led light #2
 leds_list = [water_gpio, l1,  l2, sprinkler_gpio]
 
 # Watering time
-watering_time = 720
-sprinkler_time = 60
+watering_time = 60
+sprinkler_time = 10
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
 max_preci = 20
@@ -37,18 +38,21 @@ for led in leds_list:
 
 GPIO.output(water_gpio, GPIO.HIGH)
 GPIO.output(l2, GPIO.LOW)
+GPIO.output(sprinkler_gpio, GPIO.HIGH)
 
 def watering():
-	print("Watering starting", str(datetime.now()))
-#    	GPIO.output(sprinkler_gpio, GPIO.LOW)
- #       time.sleep(sprinkler_time)
-  #      GPIO.output(sprinkler_gpio, GPIO.HIGH)
-   #     time.sleep(0.25)
-	GPIO.output(water_gpio, GPIO.LOW)
-    	time.sleep(watering_time)
-   	GPIO.output(water_gpio, GPIO.HIGH)
-    	time.sleep(0.25)
-	print("Watering finished", str(datetime.now()))
+       print("Watering starting", str(datetime.now()))
+       #print("Now sprinkling", str(datetime.now()))
+       #GPIO.output(sprinkler_gpio, GPIO.LOW)
+       #time.sleep(sprinkler_time)
+       #GPIO.output(sprinkler_gpio, GPIO.HIGH)
+       #time.sleep(0.25)
+       print("Now watering balcony", str(datetime.now()))
+       GPIO.output(water_gpio, GPIO.LOW)
+       time.sleep(watering_time)
+       GPIO.output(water_gpio, GPIO.HIGH)
+       time.sleep(0.25)
+       print("Watering finished", str(datetime.now()))
 def standbyBlick(led):
         GPIO.output(led, GPIO.HIGH)
         time.sleep(0.5)

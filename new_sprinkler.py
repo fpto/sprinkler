@@ -23,28 +23,34 @@ l2 = 18 #led light #2
 leds_list = [water_gpio, l2, sprinkler_gpio]
 
 # Watering time
-watering_time = 720
+watering_time = 60
 sprinkler_time = 60
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
 max_preci = 20
 
+#Seting pins as outputs
 for led in leds_list:
 	GPIO.setup(led, GPIO.OUT)
 
+#Ensuring that all pins start in off position
 GPIO.output(water_gpio, GPIO.HIGH)
+GPIO.output(sprinkler_gpio, GPIO.HIGH)
 GPIO.output(l2, GPIO.LOW)
 
 def watering():
+        logging.info("Sprinkler running.")
         GPIO.output(sprinkler_gpio, GPIO.LOW)
         time.sleep(sprinkler_time)
         GPIO.output(sprinkler_gpio, GPIO.HIGH)
         time.sleep(0.25)
+        logging.info("Sprinkler finished.")
+        logging.info("Balcony being watered.")
     	GPIO.output(water_gpio, GPIO.LOW)
     	time.sleep(watering_time)
     	GPIO.output(water_gpio, GPIO.HIGH)
     	time.sleep(0.25)
-
+        logging.info("Balcony watering done.")
 
 def standbyBlick(led):
         GPIO.output(led, GPIO.HIGH)
@@ -88,8 +94,6 @@ def job():
 
 schedule.every().day.at('06:30').do(job)
 
-
-# uncomment line below for testing lights
 
 while True:
     schedule.run_pending()
