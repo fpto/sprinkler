@@ -40,18 +40,24 @@ GPIO.output(water_gpio, GPIO.HIGH)
 GPIO.output(l2, GPIO.LOW)
 GPIO.output(sprinkler_gpio, GPIO.HIGH)
 
-def watering():
-       print("Watering starting", str(datetime.now()))
-       #print("Now sprinkling", str(datetime.now()))
+def sprinkling(): 
+       print("Now sprinkling", str(datetime.now()))
        #GPIO.output(sprinkler_gpio, GPIO.LOW)
        #time.sleep(sprinkler_time)
        #GPIO.output(sprinkler_gpio, GPIO.HIGH)
        #time.sleep(0.25)
-       print("Now watering balcony", str(datetime.now()))
-       GPIO.output(water_gpio, GPIO.LOW)
-       time.sleep(watering_time)
-       GPIO.output(water_gpio, GPIO.HIGH)
-       time.sleep(0.25)
+def watering_balcony():
+      print("Now watering balcony", str(datetime.now()))
+#       GPIO.output(water_gpio, GPIO.LOW)
+#       time.sleep(watering_time)
+#       GPIO.output(water_gpio, GPIO.HIGH)
+#       time.sleep(0.25)
+
+# Not using this at the moment TODO: Remove
+def watering():
+       print("Watering starting", str(datetime.now()))
+       sprinkling()
+       watering_balcony()
        print("Watering finished", str(datetime.now()))
 def standbyBlick(led):
         GPIO.output(led, GPIO.HIGH)
@@ -65,7 +71,20 @@ def quickBlick(led):
         GPIO.output(led, GPIO.LOW)
         time.sleep(0.25)
 
-watering()
+#GPIO Setup for moisture sensor
+sensor1 = 21
+GPIO.setup(sensor1, GPIO.IN)
+
+def callback(sensor1):
+    if GPIO.input(sensor1):
+        print("No water detected in balcony, let it be water")
+        watering_balcony()
+    else:
+        print("Water detected in balcony, no need to water")
+
+callback(sensor1)
+sprinkling()
+
 
 #schedule.every().minute.do(watering)
 
