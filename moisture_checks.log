@@ -1,0 +1,5 @@
+2018-11-22 09:00:00,000:INFO:Running job Every 1 day at 09:00:00 do callback() (last run: [never], next run: 2018-11-22 09:00:00)
+2018-11-22 09:03:39,394:INFO:Water detected
+2018-11-22 09:06:20,471:INFO:Water detected
+2018-11-22 09:10:00,000:INFO:Running job Every 1 day at 09:10:00 do job() (last run: [never], next run: 2018-11-22 09:10:00)
+2018-11-22 09:10:00,002:INFO:Water detected
