@@ -7,27 +7,25 @@ import logging
 import datetime
 logging.basicConfig(filename='moisture_checks.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
-
-# start talking to the SMTP server for Gmail
-s = smtplib.SMTP('smtp.gmail.com', 587)
-s.starttls()
-s.ehlo()
-# now login as my gmail user
-username='rpidefabricio@gmail.com'
-password='frambuesita1!'
-s.login(username,password)
-# the email objects
-replyto='rpidefabricio@gmail.com' # where a reply to will go
-sendto=['fabricio.puerto@outlook.com'] # list to send to
-sendtoShow='Master' # what shows on the email as send to
-subject='No water detected on balcony' # subject line
-content='Hello,\n \n the sensor has not detected water on the balcony.\nPlease check your watering system\n\nWith love, \nYour raspberry pi' # content 
-# compose the email. probably should use the email python module
-mailtext='From: '+replyto+'\nTo: '+sendtoShow+'\n'
-mailtext=mailtext+'Subject:'+subject+'\n'+content
-
-# send the email
 def sendmail():
+  # start talking to the SMTP server for Gmail
+  s = smtplib.SMTP('smtp.gmail.com', 587)
+  s.starttls()
+  s.ehlo()
+  # now login as my gmail user
+  username='rpidefabricio@gmail.com'
+  password='frambuesita1!'
+  s.login(username,password)
+  # the email objects
+  replyto='rpidefabricio@gmail.com' # where a reply to will go
+  sendto=['fabricio.puerto@outlook.com'] # list to send to
+  sendtoShow='Master' # what shows on the email as send to
+  subject='No water detected on balcony' # subject line
+  content='Hello,\n \n the sensor has not detected water on the balcony.\nPlease check your watering system\n\nWith love, \nYour raspberry pi' # content
+  # compose the email. probably should use the email python module
+  mailtext='From: '+replyto+'\nTo: '+sendtoShow+'\n'
+  mailtext=mailtext+'Subject:'+subject+'\n'+content
+  # send the email
   s.sendmail(replyto, sendto, mailtext)
   # we’re done
   rslt=s.quit()
@@ -55,8 +53,7 @@ def job():
     logging.info(" Quit")
     GPIO.cleanup()
 
-schedule.every().day.at('09:10').do(job)
+schedule.every().day.at('06:35').do(job)
 
 while True:
     schedule.run_pending()
-
