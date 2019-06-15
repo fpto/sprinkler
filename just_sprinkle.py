@@ -28,7 +28,7 @@ leds_list = [water_gpio, l1,  l2, sprinkler_gpio]
 
 # Watering time
 watering_time = 60
-sprinkler_time = 10
+sprinkler_time = 120
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
 max_preci = 20
@@ -41,17 +41,22 @@ GPIO.output(l2, GPIO.LOW)
 GPIO.output(sprinkler_gpio, GPIO.HIGH)
 
 def sprinkling(): 
-       print("Now sprinkling", str(datetime.now()))
-       #GPIO.output(sprinkler_gpio, GPIO.LOW)
-       #time.sleep(sprinkler_time)
-       #GPIO.output(sprinkler_gpio, GPIO.HIGH)
-       #time.sleep(0.25)
+       print("Now sprinkling for "+str(sprinkler_time)+ " seconds: " , str(datetime.now()))
+       GPIO.output(sprinkler_gpio, GPIO.LOW)
+       time.sleep(sprinkler_time)
+       GPIO.output(sprinkler_gpio, GPIO.HIGH)
+       time.sleep(0.25)
+       print("Sprinkling finished", str(datetime.now()))
 def watering_balcony():
-      print("Now watering balcony", str(datetime.now()))
-#       GPIO.output(water_gpio, GPIO.LOW)
-#       time.sleep(watering_time)
-#       GPIO.output(water_gpio, GPIO.HIGH)
-#       time.sleep(0.25)
+      print("Now watering balcony for "+str(watering_time)+" seconds :", str(datetime.now()))
+      start = datetime.now()
+      GPIO.output(water_gpio, GPIO.LOW)
+      time.sleep(watering_time)
+      GPIO.output(water_gpio, GPIO.HIGH)
+      time.sleep(0.25)
+      finish = datetime.now()
+      time_spent = finish - start
+      print("Watering finished, it took " + str(time_spent), str(datetime.now()))
 
 # Not using this at the moment TODO: Remove
 def watering():
@@ -79,11 +84,11 @@ def callback(sensor1):
     if GPIO.input(sensor1):
         print("No water detected in balcony, let it be water")
         watering_balcony()
+	sprinkling()
     else:
         print("Water detected in balcony, no need to water")
 
-callback(sensor1)
-sprinkling()
+#callback(sensor1)
 
 
 #schedule.every().minute.do(watering)

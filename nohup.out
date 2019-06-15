@@ -32,3 +32,37 @@ KeyboardInterrupt
     logging.info("Balcony being watered.")
                                          ^
 IndentationError: unindent does not match any outer indentation level
+Not enough water so. Watering starting.
+Watering finished
+Not enough water so. Watering starting.
+Watering finished
+Not enough water so. Watering starting.
+Watering finished
+Not enough water so. Watering starting.
+Watering finished
+Not enough water so. Watering starting.
+Watering finished
+Traceback (most recent call last):
+  File "new_sprinkler.py", line 99, in <module>
+    schedule.run_pending()
+  File "/home/pi/.local/lib/python2.7/site-packages/schedule/__init__.py", line 493, in run_pending
+    default_scheduler.run_pending()
+  File "/home/pi/.local/lib/python2.7/site-packages/schedule/__init__.py", line 78, in run_pending
+    self._run_job(job)
+  File "/home/pi/.local/lib/python2.7/site-packages/schedule/__init__.py", line 131, in _run_job
+    ret = job.run()
+  File "/home/pi/.local/lib/python2.7/site-packages/schedule/__init__.py", line 411, in run
+    ret = self.job_func()
+  File "new_sprinkler.py", line 75, in job
+    todays_weather_forecast = requests.get(FORECAST_API_URL.format(town=city, key=api_key))
+  File "/usr/lib/python2.7/dist-packages/requests/api.py", line 70, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/api.py", line 56, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/sessions.py", line 488, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/sessions.py", line 609, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/adapters.py", line 473, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', BadStatusLine("''",))

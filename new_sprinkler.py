@@ -24,7 +24,7 @@ leds_list = [water_gpio, l2, sprinkler_gpio]
 
 # Watering time
 watering_time = 60
-sprinkler_time = 60
+sprinkler_time = 180
 
 # Precipitation threshold is the maximum forecast of rain expected where watering would still happen.
 max_preci = 20

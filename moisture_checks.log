@@ -3,3 +3,9 @@
 2018-11-22 09:06:20,471:INFO:Water detected
 2018-11-22 09:10:00,000:INFO:Running job Every 1 day at 09:10:00 do job() (last run: [never], next run: 2018-11-22 09:10:00)
 2018-11-22 09:10:00,002:INFO:Water detected
+2018-11-23 09:10:00,000:INFO:Running job Every 1 day at 09:10:00 do job() (last run: [never], next run: 2018-11-23 09:10:00)
+2018-11-23 09:10:00,002:INFO:Water detected
+2018-11-24 09:10:00,000:INFO:Running job Every 1 day at 09:10:00 do job() (last run: 2018-11-23 09:10:00, next run: 2018-11-24 09:10:00)
+2018-11-24 09:10:00,001:INFO:Water detected
+2018-11-25 09:10:00,000:INFO:Running job Every 1 day at 09:10:00 do job() (last run: 2018-11-24 09:10:00, next run: 2018-11-25 09:10:00)
+2018-11-25 09:10:00,001:INFO:Water detected
